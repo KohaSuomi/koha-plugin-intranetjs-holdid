@@ -39,8 +39,15 @@ $(document).ready(function () {
             holdid_textfield.trigger('blur');
         });
     }
+});
 
+$(document).ready(function () {
     if (window.location.pathname == '/cgi-bin/koha/members/memberentry.pl' && window.location.search.includes("?op=edit_form")) {
+        var unixepoch = Math.round((new Date()).getTime() / 10).toString();
+        var epochdashed = unixepoch.replace(/(....)/g, '$1-').replace(/-$/, '');
+        var holdidelem = $("[data-pa_code=HOLDID]");
+        var holdid_textfield = holdidelem.children('textarea').eq(0);
+        
         $('<a class="buttonDot" href="#" id="generate_holdid" title="Luo varaustunnus" style="vertical-align: top;"> ...</a>').insertAfter(holdid_textfield);
         $("#generate_holdid").click(function (event) {
             event.preventDefault();
