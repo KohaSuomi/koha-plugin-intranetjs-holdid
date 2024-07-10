@@ -1,9 +1,20 @@
 /// ALKU ///
-// Varaustunnus-asiakasmääreen siirto asiakkaan muokkausnäytöllä asiakkaan tiedot-nääkymään alapuolelle.
+// Varaustunnus-asiakasmääreen siirto asiakkaan muokkausnäytöllä asiakkaan tiedot-nääkymään alapuolelle. Napin uudelleengenerointi
 $(document).ready(function () {
     if (window.location.href.indexOf("members/memberentry.pl") > -1) {
         var holdidelem = $("[data-pa_code=HOLDID]");
         $("#identity_lgd").next().append(holdidelem);
+        
+        var holdid_textfield = holdidelem.children('textarea').eq(0);
+        var clearbutton = holdidelem.find('.clear_attribute');
+        
+        //clearbutton.replaceWith( '<button type="button" class="fa fa-fw fa-trash fa-lg" style="color:green; border:none;">' );
+        //var trashcan =  holdidelem.children('button').eq(0);
+        
+        clearbutton.on('click', function(e){
+            e.preventDefault()
+        holdid_textfield.val('');
+        });
     }
 });
 /// LOPPU ///
