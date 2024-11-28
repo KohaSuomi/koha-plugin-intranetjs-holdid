@@ -26,9 +26,9 @@ $(document).ready(function () {
         var unixepoch = Math.round((new Date()).getTime() / 10).toString();
         var epochdashed = unixepoch.replace(/(....)/g, '$1-').replace(/-$/, '');
         var holdidelem = $("[data-pa_code=HOLDID]");
-        var holdid_textfield = holdidelem.children('textarea').eq(0);
+        var holdid_textfield = holdidelem.find('textarea').eq(0);
         
-        if (!holdid_textfield.val) {
+        if (holdid_textfield.val().length == 0) {
             holdid_textfield.val(epochdashed);
         }
 
