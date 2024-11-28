@@ -27,8 +27,10 @@ $(document).ready(function () {
         var epochdashed = unixepoch.replace(/(....)/g, '$1-').replace(/-$/, '');
         var holdidelem = $("[data-pa_code=HOLDID]");
         var holdid_textfield = holdidelem.children('textarea').eq(0);
-
-        holdid_textfield.val(epochdashed);
+        
+        if (!holdid_textfield.val) {
+            holdid_textfield.val(epochdashed);
+        }
 
         $('<a class="buttonDot" href="#" id="generate_holdid" title="Luo varaustunnus" style="vertical-align: top;"> ...</a>').insertAfter(holdid_textfield);
         $("#generate_holdid").click(function (event) {
