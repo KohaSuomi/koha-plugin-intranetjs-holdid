@@ -22,7 +22,7 @@ our $metadata = {
     minimum_version => '23.11',
     maximum_version => '',
     version         => $VERSION,
-    description     => "Varaustunnuksen generointi ja sen siirtäminen pois asiakasmääreistä",
+    description     => "Varaustunnuksen generointi ja sen siirtäminen pois asiakasmääreistä. (Paikalliskannat)",
 };
 
 ## This is the minimum code required for a plugin's 'new' method
