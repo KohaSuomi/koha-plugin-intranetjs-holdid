@@ -4,13 +4,13 @@ $(document).ready(function () {
     if (window.location.href.indexOf("members/memberentry.pl") > -1) {
         var holdidelem = $("[data-pa_code=HOLDID]");
         $("#identity_lgd").next().append(holdidelem);
-        
+
         var holdid_textfield = holdidelem.children('textarea').eq(0);
         var clearbutton = holdidelem.find('.clear_attribute');
-        
+
         //clearbutton.replaceWith( '<button type="button" class="fa fa-fw fa-trash fa-lg" style="color:green; border:none;">' );
         //var trashcan =  holdidelem.children('button').eq(0);
-        
+
         clearbutton.on('click', function(e){
             e.preventDefault()
         holdid_textfield.val('');
@@ -27,7 +27,7 @@ $(document).ready(function () {
         var epochdashed = unixepoch.replace(/(....)/g, '$1-').replace(/-$/, '');
         var holdidelem = $("[data-pa_code=HOLDID]");
         var holdid_textfield = holdidelem.find('textarea').eq(0);
-        
+
         if (holdid_textfield.val().length == 0) {
             holdid_textfield.val(epochdashed);
         }
@@ -39,6 +39,18 @@ $(document).ready(function () {
             epochdashed = unixepoch.replace(/(....)/g, '$1-').replace(/-$/, '');
             holdid_textfield.val(epochdashed);
             holdid_textfield.trigger('blur');
+        });
+    }
+});
+
+$(document).ready(function () {
+    if (window.location.pathname == '/cgi-bin/koha/members/memberentry.pl') {
+        var holdidelem = $("[data-pa_code=HOLDID]");
+        var holdid_textfield = holdidelem.find('textarea').eq(0);
+        holdid_textfield.blur(function () {
+            var tmp = $(this).val();
+            tmp = tmp.replace(/(\r\n|\n|\r)/gm, "");
+            $(this).val(tmp);
         });
     }
 });
