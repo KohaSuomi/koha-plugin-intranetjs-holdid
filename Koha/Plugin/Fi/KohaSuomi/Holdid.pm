@@ -16,14 +16,12 @@ our $VERSION = "1.0.0";
 
 ## Here is our metadata, some keys are required, some are optional
 our $metadata = {
-    name            => "IntranetUserJS: HoldID",
     author          => 'Lari Strand',
     date_authored   => '2024-07-09',
     date_updated    => '2024-07-09',
     minimum_version => '23.11',
     maximum_version => '',
     version         => $VERSION,
-    description     => "Varaustunnuksen generointi ja sen siirtäminen pois asiakasmääreistä. (Paikalliskannat)",
 };
 
 sub get_localized_metadata {
@@ -32,15 +30,14 @@ sub get_localized_metadata {
     my ($name, $description);
 
     if ($lang eq 'sv-SE') {
-        $name = "IntranetUserJS: ReservationsID";
-        $description = "Generering av reservation-ID och dess flyttning utanför kundspecifika inställningar. (Lokala databaser)";
-    
+        $name = "IntranetUserJS: Reservationskod";
+        $description = "Genererar reservationskod och flyttar den till Låntagaridentitet. (Lokala databaser)";
     } elsif ($lang eq 'fi-FI' ) {
-        $name = "IntranetUserJS VarausID";
-        $description = "Varaustunnuksen generointi ja sen siirtäminen pois asiakasmääreistä. (Paikalliskannat)";
+        $name = "IntranetUserJS: Varaustunnus";
+        $description = "Generoi varaustunnuksen ja siirtää sen asiakasmääreistä Asiakkaan tiedot -osioon. (Paikalliskannat)";
     } else {
-        $name = "IntranetUserJS: HoldID";
-        $description = "Generation of hold ID and its removal from customer-specific settings. (Local databases)";
+        $name = "IntranetUserJS: Hold ID";
+        $description = "Generates hold ID and moves it from Additional attributes and identifiers to the Patron identity section. (Local databases)";
     }
     return ($name, $description);
 }
@@ -109,36 +106,6 @@ sub admin {
 
     $self->output_html( $template->output() );
 }
-
-## If your tool is complicated enough to needs it's own setting/configuration
-## you will want to add a 'configure' method to your plugin like so.
-## Here I am throwing all the logic into the 'configure' method, but it could
-## be split up like the 'report' method is.
-# sub configure {
-#     my ( $self, $args ) = @_;
-#     my $cgi = $self->{'cgi'};
-
-#     unless ( $cgi->param('save') ) {
-#         my $template = $self->get_template({ file => 'configure.tt' });
-
-#         ## Grab the values we already have for our settings, if any exist
-#         $template->param(
-#             config_param_a => $self->retrieve_data('config_param_a'),
-#             last_upgraded   => $self->retrieve_data('last_upgraded'),
-#         );
-
-#         $self->output_html( $template->output() );
-#     }
-#     else {
-#         $self->store_data(
-#             {
-#                 config_param_a => $cgi->param('config_param_a'),
-#                 last_configured_by => C4::Context->userenv->{'number'},
-#             }
-#         );
-#         $self->go_home();
-#     }
-# }
 
 ## This is the 'install' method. Any database tables or other setup that should
 ## be done when the plugin if first installed should be executed in this method.
